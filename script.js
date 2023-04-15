@@ -49,7 +49,9 @@ const rightPaddle = {
         }
     },
     speedUp: function () {
-        this.speed += 2
+        if (this.speed <= 20) {
+            this.speed += 0.5
+        }
     },
     draw: function () {
         canvasCtx.fillStyle = "#ffffff"
@@ -75,7 +77,6 @@ const score = {
         canvasCtx.fillStyle = "#01341D"
         canvasCtx.fillText(this.human, field.w / 4, 50)
         canvasCtx.fillText(this.computer, field.w / 4 + field.w / 2, 50)
-
     },
 }
 
@@ -83,16 +84,12 @@ const ball = {
     x: field.w / 2,
     y: field.h / 2,
     r: 20,
-    speed: 5,
+    speed: 10,
     directionX: 1,
     directionY: 1,
     _calcPosition: function () {
-
         if (this.x > field.w - this.r - rightPaddle.w - gapX) {
-            if (
-                this.y + this.r > rightPaddle.y &&
-                this.y - this.r < rightPaddle.y + rightPaddle.h
-            ) {
+            if (this.y + this.r > rightPaddle.y && this.y - this.r < rightPaddle.y + rightPaddle.h) {
                 this._reverseX()
             } else {
                 score.increaseHuman()
@@ -126,7 +123,9 @@ const ball = {
         this.directionY *= -1
     },
     _speedUp: function () {
-        this.speed += 3
+        if (this.speed <= 20) {
+            this.speed += 2
+        }
     },
     _pointUp: function () {
         this._speedUp()
@@ -163,8 +162,6 @@ function draw() {
     score.draw()
     ball.draw()
 }
-
-
 
 window.animateFrame = (function () {
     return (
