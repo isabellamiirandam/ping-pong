@@ -80,8 +80,8 @@ const score = {
 }
 
 const ball = {
-    x: 0,
-    y: 0,
+    x: field.w / 2,
+    y: field.h / 2,
     r: 20,
     speed: 5,
     directionX: 1,
